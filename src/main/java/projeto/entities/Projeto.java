@@ -16,6 +16,7 @@ public class Projeto {
   @Column(name = "projeto_id")
   private UUID projetoId;
 
+  @Column(nullable = false)
   private String nome;
 
   private String descricao;
@@ -23,8 +24,12 @@ public class Projeto {
   @CreationTimestamp
   private Instant dataCriacao;
 
-  @OneToMany(mappedBy = "projeto")
+  @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Atividade> atividades;
+
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  private Usuario responsavel;
 
   public UUID getProjetoId() {
     return projetoId;

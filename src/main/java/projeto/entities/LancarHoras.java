@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,15 +18,18 @@ import jakarta.persistence.Table;
 public class LancarHoras {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY) // Se estiver usando MySQL
   @Column(name = "horas_id")
   private Long horasId;
 
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false) // Define a chave estrangeira corretamente
   private Usuario usuario;
 
   private String conteudo;
 
   @CreationTimestamp
+  @Column(nullable = false, updatable = false)
   private Instant dataCriacao;
 
   public Long getHorasId() {

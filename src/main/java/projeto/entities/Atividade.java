@@ -12,9 +12,10 @@ public class Atividade {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
-  @Column(name = "atividades_id")
+  @Column(name = "atividade_id")
   private UUID atividadeId;
 
+  @Column(nullable = false)
   private String nome;
 
   private String descricao;
@@ -22,6 +23,10 @@ public class Atividade {
   @ManyToOne
   @JoinColumn(name = "projeto_id", nullable = false)
   private Projeto projeto;
+
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  private Usuario usuario;
 
   @CreationTimestamp
   private Instant dataCriacao;
