@@ -1,42 +1,42 @@
-package projeto.entities;
+package projeto.backend.entities;
 
 import java.util.UUID;
 import java.time.Instant;
+import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_atividades")
-public class Atividade {
+@Table(name = "tb_projetos")
+public class Projeto {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
-  @Column(name = "atividade_id")
-  private UUID atividadeId;
+  @Column(name = "projeto_id")
+  private UUID projetoId;
 
   @Column(nullable = false)
   private String nome;
 
   private String descricao;
 
-  @ManyToOne
-  @JoinColumn(name = "projeto_id", nullable = false)
-  private Projeto projeto;
-
-  @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
-  private Usuario usuario;
-
   @CreationTimestamp
   private Instant dataCriacao;
 
-  public UUID getAtividadeId() {
-    return atividadeId;
+  @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Atividade> atividades;
+
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  private Usuario responsavel;
+
+  public UUID getProjetoId() {
+    return projetoId;
   }
 
-  public void setAtividadeId(UUID atividadeId) {
-    this.atividadeId = atividadeId;
+  public void setProjetoId(UUID projetoId) {
+    this.projetoId = projetoId;
   }
 
   public String getNome() {
@@ -55,20 +55,20 @@ public class Atividade {
     this.descricao = descricao;
   }
 
-  public Projeto getProjeto() {
-    return projeto;
-  }
-
-  public void setProjeto(Projeto projeto) {
-    this.projeto = projeto;
-  }
-
   public Instant getDataCriacao() {
     return dataCriacao;
   }
 
   public void setDataCriacao(Instant dataCriacao) {
     this.dataCriacao = dataCriacao;
+  }
+
+  public Set<Atividade> getAtividades() {
+    return atividades;
+  }
+
+  public void setAtividades(Set<Atividade> atividades) {
+    this.atividades = atividades;
   }
 
 }

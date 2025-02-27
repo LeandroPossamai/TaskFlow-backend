@@ -1,13 +1,13 @@
-package repository;
+package projeto.backend.repository;
 
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import projeto.entities.Atividade;
+import projeto.backend.entities.Projeto;
 
 @Repository
-public interface AtividadeRepository extends JpaRepository<Atividade, UUID> {
+public interface ProjetoRepository extends JpaRepository<Projeto, UUID> {
 
 }

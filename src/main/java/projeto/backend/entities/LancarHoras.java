@@ -1,4 +1,4 @@
-package projeto.entities;
+package projeto.backend.entities;
 
 import java.time.Instant;
 

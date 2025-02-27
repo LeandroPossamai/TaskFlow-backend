@@ -1,10 +1,8 @@
-package projeto.entities;
+package projeto.backend.entities;
 
 import java.sql.Date;
 import java.util.Set;
 import java.util.UUID;
-
-import javax.management.relation.Role;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
