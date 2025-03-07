@@ -37,7 +37,8 @@ public class Role {
 
   // Enum dentro da classe Role, com valores predefinidos
   public enum Values {
-    USUARIO(2L, "usuario");
+    USUARIO(2L, "usuario"),
+    ADMIN(1L, "admin");
 
     private final long roleId;
     private final String name;
