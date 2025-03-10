@@ -71,4 +71,9 @@ public class Role {
     }
   }
 
+  public Role orElseGet(Object object) {
+
+    throw new UnsupportedOperationException("Unimplemented method 'orElseGet'");
+  }
+
 }
