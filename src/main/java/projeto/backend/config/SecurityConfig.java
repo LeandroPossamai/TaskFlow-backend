@@ -52,6 +52,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(auth -> {
           System.out.println("Configurando autorizações...");
           auth.requestMatchers("/login").permitAll();
+          auth.requestMatchers("/users").permitAll();
           auth.anyRequest().authenticated();
         });
 
