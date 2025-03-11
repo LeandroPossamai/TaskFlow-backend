@@ -1,6 +1,7 @@
 package projeto.backend.controller;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,10 @@ public class TokenController {
         System.out.println("Senha incorreta");
         throw new BadCredentialsException("Usuário ou senha inválidos");
       }
+
+      // Atualiza o campo ultimo_login
+      user.setUltimoLogin(LocalDateTime.now());
+      userRepository.save(user); // Salva a alteração no banco de dados
 
       var now = Instant.now();
       var expiresIn = 300L;
