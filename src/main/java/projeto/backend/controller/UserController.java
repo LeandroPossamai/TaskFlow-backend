@@ -12,6 +12,7 @@ import projeto.backend.entities.Role;
 import projeto.backend.entities.Usuario;
 
 import java.util.Set;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -53,7 +54,9 @@ public class UserController {
     Usuario user = new Usuario();
     user.setUsername(dto.username());
     user.setSenha(passwordEncoder.encode(dto.password()));
-    user.setRoles(Set.of(basicRole));
+    user.setEmail(dto.email());
+    user.setDataCriacao(LocalDateTime.now());
+    user.setPerfil(Set.of(basicRole));
 
     userRepository.save(user);
 

@@ -1,6 +1,6 @@
 package projeto.backend.entities;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -35,13 +35,19 @@ public class Usuario {
 
   private String senha;
 
-  private Date data_criacao;
+  @Column(name = "data_criacao")
+  private LocalDateTime dataCriacao;
 
-  private Date ultimo_login;
+  @Column(name = "ultimo_login")
+  private LocalDateTime ultimoLogin;
 
   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinTable(name = "tb_users_perfil", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> perfil;
+
+  public Usuario() {
+    // Construtor padrão necessário para o JPA
+  }
 
   public UUID getUserId() {
     return userId;
@@ -75,20 +81,20 @@ public class Usuario {
     this.senha = senha;
   }
 
-  public Date getData_criacao() {
-    return data_criacao;
+  public LocalDateTime getDataCriacao() {
+    return dataCriacao;
   }
 
-  public void setData_criacao(Date data_criacao) {
-    this.data_criacao = data_criacao;
+  public void setDataCriacao(LocalDateTime dataCriacao) {
+    this.dataCriacao = dataCriacao;
   }
 
-  public Date getUltimo_login() {
-    return ultimo_login;
+  public LocalDateTime getUltimoLogin() {
+    return ultimoLogin;
   }
 
-  public void setUltimo_login(Date ultimo_login) {
-    this.ultimo_login = ultimo_login;
+  public void setUltimoLogin(LocalDateTime ultimoLogin) {
+    this.ultimoLogin = ultimoLogin;
   }
 
   public Set<Role> getPerfil() {
@@ -103,11 +109,8 @@ public class Usuario {
     return passwordEncoder.matches(loginRequest.password(), this.senha);
   }
 
-  public void setRoles(Set<Role> roles) {
-    this.perfil = roles;
-  }
-
-  public void setPassword(String password) {
-    this.senha = password;
+  public void setRoles(Set<Role> of) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'setRoles'");
   }
 }
