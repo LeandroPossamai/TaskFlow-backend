@@ -1,0 +1,19 @@
+meta {
+  name: create-user
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+  "username": "gabriel",
+  "password": "123",
+  "email": "pedro@gmail.com"
+  }
+}

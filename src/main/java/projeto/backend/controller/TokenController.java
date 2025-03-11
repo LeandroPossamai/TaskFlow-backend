@@ -2,6 +2,7 @@ package projeto.backend.controller;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.RestController;
 import projeto.backend.controller.dto.LoginRequest;
 import projeto.backend.controller.dto.LoginResponse;
+import projeto.backend.entities.Role;
 import projeto.backend.repository.UserRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,12 +63,16 @@ public class TokenController {
 
       var now = Instant.now();
       var expiresIn = 300L;
+      var scopes = user.getPerfil().stream()
+          .map(Role::getName).collect(Collectors
+              .joining(" "));
 
       var claims = JwtClaimsSet.builder()
           .issuer("mybackend")
           .subject(user.getUserId().toString())
           .issuedAt(now)
           .expiresAt(now.plusSeconds(expiresIn))
+          .claim("scope", scopes)
           .build();
 
       var jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();

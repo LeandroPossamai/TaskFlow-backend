@@ -108,9 +108,4 @@ public class Usuario {
   public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
     return passwordEncoder.matches(loginRequest.password(), this.senha);
   }
-
-  public void setRoles(Set<Role> of) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'setRoles'");
-  }
 }
