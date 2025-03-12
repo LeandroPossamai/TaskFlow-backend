@@ -1,0 +1,36 @@
+meta {
+  name: projetos
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:8080/projetos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{acessToken}}
+}
+
+body:json {
+  {
+    "nome": "Projeto Teste",
+    "descricao": "Descrição do projeto teste",
+    "dataCriacao": "2023-10-01",
+    "dataFim": "2023-12-31",
+    "status": "Em andamento",
+    "atividades": [
+      {
+        "nome": "Atividade 1",
+        "descricao": "Descrição da atividade 1",
+        "usuarioId": "14db3fa20f3b4676a4f7c18d2ccb1a20"
+      }
+    ]
+  }
+}
+
+vars:post-response {
+  acessToken: res.body.acessToken
+}

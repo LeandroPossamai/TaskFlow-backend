@@ -1,11 +1,9 @@
 package projeto.backend.entities;
 
-import java.util.UUID;
-import java.time.Instant;
-import java.util.Set;
-
-import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_projetos")
@@ -21,16 +19,22 @@ public class Projeto {
 
   private String descricao;
 
-  @CreationTimestamp
-  private Instant dataCriacao;
+  @Column(nullable = false)
+  private String dataCriacao;
+
+  private String dataFim;
+
+  @Column(nullable = false)
+  private String status;
 
   @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Atividade> atividades;
+  private List<Atividade> atividades;
 
   @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
-  private Usuario responsavel;
+  @JoinColumn(name = "user_id", nullable = false) // Adicione esta linha
+  private Usuario usuario; // Relacionamento com a entidade Usuario
 
+  // Getters e setters
   public UUID getProjetoId() {
     return projetoId;
   }
@@ -55,20 +59,43 @@ public class Projeto {
     this.descricao = descricao;
   }
 
-  public Instant getDataCriacao() {
+  public String getDataCriacao() {
     return dataCriacao;
   }
 
-  public void setDataCriacao(Instant dataCriacao) {
+  public void setDataCriacao(String dataCriacao) {
     this.dataCriacao = dataCriacao;
   }
 
-  public Set<Atividade> getAtividades() {
+  public String getDataFim() {
+    return dataFim;
+  }
+
+  public void setDataFim(String dataFim) {
+    this.dataFim = dataFim;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public List<Atividade> getAtividades() {
     return atividades;
   }
 
-  public void setAtividades(Set<Atividade> atividades) {
+  public void setAtividades(List<Atividade> atividades) {
     this.atividades = atividades;
   }
 
+  public Usuario getUsuario() {
+    return usuario;
+  }
+
+  public void setUsuario(Usuario usuario) {
+    this.usuario = usuario;
+  }
 }

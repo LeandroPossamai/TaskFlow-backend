@@ -71,4 +71,8 @@ public class Atividade {
     this.dataCriacao = dataCriacao;
   }
 
+  public void setUsuario(Usuario usuario) {
+    this.usuario = usuario;
+  }
+
 }

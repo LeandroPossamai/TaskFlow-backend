@@ -41,7 +41,7 @@ public class AdminUserConfig implements CommandLineRunner {
       Usuario user = new Usuario();
       user.setUsername("admin");
       user.setSenha(passwordEncoder.encode("123"));
-      user.setRoles(Set.of(roleAdmin));
+      user.setPerfil(Set.of(roleAdmin));
 
       userRepository.save(user);
       System.out.println("Usuário admin criado com sucesso!");

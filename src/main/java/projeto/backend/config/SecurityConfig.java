@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -28,6 +29,7 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 
 @Configuration
 @EnableWebSecurity
+
 public class SecurityConfig {
 
   @Bean
@@ -53,6 +55,7 @@ public class SecurityConfig {
           System.out.println("Configurando autorizações...");
           auth.requestMatchers("/login").permitAll();
           auth.requestMatchers("/users").permitAll();
+          auth.requestMatchers("/projetos").permitAll();
           auth.anyRequest().authenticated();
         });
 

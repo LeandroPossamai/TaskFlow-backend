@@ -1,13 +1,10 @@
 package projeto.backend.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import projeto.backend.entities.Projeto;
+import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-import projeto.backend.entities.Projeto;
-
-@Repository
 public interface ProjetoRepository extends JpaRepository<Projeto, UUID> {
-
+  Optional<Projeto> findByNome(String nome);
 }
